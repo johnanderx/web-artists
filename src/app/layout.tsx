@@ -1,7 +1,8 @@
 import React from "react";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-
+import "./globals.css";
+import { colors } from "@/global/colors";
 const poppins = Poppins({
   weight: ["400", "600", "800"],
   subsets: ["latin"],
@@ -19,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins}`}>{children}</body>
+      <body className={`${poppins} bg-[${colors.dark01}]`}>{children}</body>
     </html>
   );
 }
