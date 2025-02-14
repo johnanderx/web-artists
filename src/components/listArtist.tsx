@@ -1,6 +1,8 @@
 "use client";
-
-import React from "react";
+import Modal from "./Modal";
+import Button from "./Button";
+import { useContexts } from "@/hooks/useContext";
+import { motion } from "motion/react";
 
 const data = {
   artists: [
@@ -13,10 +15,12 @@ const data = {
 };
 
 export default function listArtist() {
+  const { modal, setModal } = useContexts();
+
   return (
     <div className="p-4 space-y-4">
       <h1 className="text-xl font-bold">List of Artists</h1>
-      <ul className="space-y-2 w-screen flex flex-col items-center">
+      <ul className="space-y-2 w-full flex flex-col items-center">
         {data.artists.map((artist) => (
           <li
             key={artist.id}
@@ -34,14 +38,11 @@ export default function listArtist() {
               <span className="text-sm text-gray02">Style: {artist.style}</span>
             </div>
 
-            <button
-              className={`text-white rounded-lg w-24 p-2 flex justify-center bg-dark02 hover:bg-zinc-700 duration-500`}
-            >
-              Selecionar
-            </button>
+            <Button title="Selecionar" event={() => setModal(!modal)} />
           </li>
         ))}
       </ul>
+      {modal && <Modal />}
     </div>
   );
 }

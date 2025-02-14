@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import ContextProvider from "@/context/Context";
 const poppins = Poppins({
   weight: ["400", "600", "800"],
   subsets: ["latin"],
@@ -19,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins} bg-dark01`}>{children}</body>
+      <body className={`${poppins} bg-dark01 `}>
+        <ContextProvider>{children}</ContextProvider>
+      </body>
     </html>
   );
 }

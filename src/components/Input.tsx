@@ -1,12 +1,15 @@
-"use client";
 import React from "react";
 
-export default function Input() {
+interface InputProps {
+  placeholder: string;
+}
+
+export default function Input({ placeholder }: InputProps) {
   return (
     <input
-      className="bg-dark02 text-white w-4/5 lg:w-96 pl-2 p-2 rounded-md outline-none"
+      className="bg-dark02 text-white w-[95%] lg:w-96 pl-2 p-2.5 rounded-md outline-none"
       type="text"
-      placeholder="search"
+      placeholder={placeholder}
     />
   );
 }

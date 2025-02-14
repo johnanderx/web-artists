@@ -3,7 +3,7 @@ import ListArtist from "@/components/listArtist";
 export default function Artists() {
   return (
     <main className="flex flex-col items-center mt-4">
-      <Input />
+      <Input placeholder="search" />
       <ListArtist />
     </main>
   );
