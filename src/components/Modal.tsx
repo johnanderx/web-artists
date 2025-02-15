@@ -7,8 +7,22 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
 export default function Modal() {
-  const { modal, setModal, selectedArtists, setHiredArtists, hiredArtists } =
-    useContexts();
+  const {
+    modal,
+    setModal,
+    setHiredArtists,
+    hiredArtists,
+    name,
+    artist,
+    address,
+    eventData,
+    money,
+    setName,
+    setArtist,
+    setAddress,
+    setEventData,
+    setMoney,
+  } = useContexts();
 
   const route = useRouter();
 
@@ -27,27 +41,16 @@ export default function Modal() {
   };
 
   const hireArtist = () => {
-    setHiredArtists(selectedArtists);
+    const formData = { name, artist, money, eventData, address };
+    const updatedHiredArtists = [...hiredArtists, formData];
+    setHiredArtists(updatedHiredArtists);
+
+    localStorage.setItem("hiredArtists", JSON.stringify(updatedHiredArtists));
+
     setModal(!modal);
     route.push("/hiredArtists");
   };
 
-  useEffect(() => {
-    const existingHiredArtists = JSON.parse(
-      localStorage.getItem("hiredArtists") || "[]"
-    );
-    // checking if the list of existing localstorage artists already has an artist with the same name as the new artist.
-    const filteredArtists = hiredArtists.filter(
-      (artist) =>
-        !existingHiredArtists.some(
-          (existingArtist: any) => existingArtist.name === artist.name
-        )
-    );
-
-    const updatedHiredArtists = [...existingHiredArtists, ...filteredArtists];
-
-    localStorage.setItem("hiredArtists", JSON.stringify(updatedHiredArtists));
-  }, [hiredArtists]);
   return (
     <motion.div
       className="bg-[rgba(0,0,0,0.5)] fixed w-full h-full top-0 bottom-0 left-0 right-0 flex items-center justify-center"
@@ -61,11 +64,26 @@ export default function Modal() {
             onClick={() => setModal(!modal)}
             className="text-white text-4xl cursor-pointer"
           />
-          <Input placeholder="name" />
-          <Input placeholder="Artista" />
-          <Input placeholder="Cachê" />
-          <Input placeholder="Data do evento" />
-          <Input placeholder="Endereço" />
+          <Input
+            placeholder="name"
+            event={(e: any) => setName(e.target.value)}
+          />
+          <Input
+            placeholder="Artista"
+            event={(e: any) => setArtist(e.target.value)}
+          />
+          <Input
+            placeholder="money"
+            event={(e: any) => setMoney(e.target.value)}
+          />
+          <Input
+            placeholder="Event date"
+            event={(e: any) => setEventData(e.target.value)}
+          />
+          <Input
+            placeholder="address"
+            event={(e: any) => setAddress(e.target.value)}
+          />
           <Button title="Enviar" event={hireArtist} />
         </div>
       </div>

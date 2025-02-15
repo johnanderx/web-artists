@@ -4,7 +4,7 @@ import Button from "./Button";
 import { useContexts } from "@/hooks/useContext";
 import { useEffect } from "react";
 import Input from "./Input";
-import { Track, Artist } from "@/@types/types";
+import { Track } from "@/@types/types";
 
 export default function ListArtist() {
   const {
@@ -19,7 +19,6 @@ export default function ListArtist() {
     setOffset,
     total,
     setTotal,
-    setSelectedArtists,
   } = useContexts();
 
   useEffect(() => {
@@ -52,11 +51,6 @@ export default function ListArtist() {
     if (offset > 0) setOffset(offset - limit);
   };
 
-  const openModal = (artist: Artist) => {
-    setModal(!modal);
-    setSelectedArtists((prevArtist) => [...prevArtist, artist]);
-  };
-
   return (
     <div className="p-4 space-y-4">
       <Input
@@ -83,7 +77,7 @@ export default function ListArtist() {
                 Artista: {track.artist.name}
               </p>
             </div>
-            <Button title="Selecionar" event={() => openModal(track.artist)} />
+            <Button title="Selecionar" event={() => setModal(!modal)} />
           </li>
         ))}
       </ul>

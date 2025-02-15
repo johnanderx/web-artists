@@ -2,7 +2,6 @@
 
 import React, { useEffect } from "react";
 import { useContexts } from "@/hooks/useContext";
-import { Artist } from "@/@types/types";
 
 export default function HiredArtists() {
   const { hiredArtists, setHiredArtists } = useContexts();
@@ -20,20 +19,33 @@ export default function HiredArtists() {
         Artistas Contratados
       </h1>
       <ul className="space-y-2 w-full flex flex-col items-center">
-        {hiredArtists.map((artist: Artist, index: number) => (
+        {hiredArtists.map((artist, index: number) => (
           <li
-            className="bg-black hover:bg-neutral-950 duration-500 p-4 w-[98%] lg:w-96 rounded-lg shadow-md flex items-center gap-4"
-            key={artist.id || index}
+            className="bg-black hover:bg-neutral-950 duration-500 p-4 w-[98%] lg:w-96 rounded-lg shadow-md flex flex-col justify-center items-center gap-4"
+            key={index}
           >
-            <img
-              className="h-20 w-20"
-              src={artist.picture_medium}
-              alt={artist.name}
-            />
-            <div>
-              <p className="text-sm text-gray02  text-center truncate w-32">
-                Artista: {artist.name}
-              </p>
+            <div className="flex gap-2">
+              <span className="text-sm text-white">Name:</span>
+              <span className="text-gray01">{artist.name}</span>
+            </div>
+
+            <div className="flex gap-2">
+              <span className="text-sm text-white">Artista:</span>
+              <p className="text-gray01">{artist.artist}</p>
+            </div>
+            <div className="flex gap-2">
+              <span className="text-sm text-white">Money:</span>
+              <span className="text-gray01">{artist.money}</span>
+            </div>
+
+            <div className="flex gap-2">
+              <span className="text-sm text-white">Event Data:</span>
+              <p className="text-gray01">{artist.eventData}</p>
+            </div>
+
+            <div className="flex gap-2">
+              <span className="text-sm text-white">Address:</span>
+              <span className="text-gray01">{artist.address}</span>
             </div>
           </li>
         ))}
