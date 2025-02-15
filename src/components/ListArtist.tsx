@@ -2,17 +2,25 @@
 import Modal from "./Modal";
 import Button from "./Button";
 import { useContexts } from "@/hooks/useContext";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Input from "./Input";
-import { Track } from "@/@types/types";
+import { Track, Artist } from "@/@types/types";
 
 export default function ListArtist() {
-  const { modal, setModal } = useContexts();
-  const [tracks, setTracks] = useState<Track[]>([]);
-  const [query, setQuery] = useState("Rock");
-  const [limit] = useState(10);
-  const [offset, setOffset] = useState(0);
-  const [total, setTotal] = useState(0);
+  const {
+    modal,
+    setModal,
+    tracks,
+    setTracks,
+    query,
+    setQuery,
+    limit,
+    offset,
+    setOffset,
+    total,
+    setTotal,
+    setSelectedArtists,
+  } = useContexts();
 
   useEffect(() => {
     const fetchTracks = async () => {
@@ -24,10 +32,9 @@ export default function ListArtist() {
         const data = await response.json();
         if (data.data) {
           setTracks(data.data);
-          console.log(tracks);
           setTotal(data.total);
         } else {
-          console.error("Dados não encontrados na resposta da API");
+          console.log("Dados não encontrados na resposta da API");
         }
       } catch (error) {
         console.error("Erro ao buscar músicas:", error);
@@ -43,6 +50,11 @@ export default function ListArtist() {
 
   const prevPage = () => {
     if (offset > 0) setOffset(offset - limit);
+  };
+
+  const openModal = (artist: Artist) => {
+    setModal(!modal);
+    setSelectedArtists((prevArtist) => [...prevArtist, artist]);
   };
 
   return (
@@ -71,7 +83,7 @@ export default function ListArtist() {
                 Artista: {track.artist.name}
               </p>
             </div>
-            <Button title="Selecionar" event={() => setModal(!modal)} />
+            <Button title="Selecionar" event={() => openModal(track.artist)} />
           </li>
         ))}
       </ul>

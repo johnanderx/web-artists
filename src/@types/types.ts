@@ -1,4 +1,4 @@
-type Artist = {
+export type Artist = {
   id: number;
   name: string;
   picture_medium: string;
