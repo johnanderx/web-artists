@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins} bg-dark01 `}>
+      <body suppressHydrationWarning={true} className={`${poppins} bg-dark01 `}>
         <ContextProvider>{children}</ContextProvider>
       </body>
     </html>

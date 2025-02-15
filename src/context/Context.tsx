@@ -14,7 +14,6 @@ export const Context = createContext({} as ContextType);
 
 export default function ContextProvider({ children }: ContextProps) {
   const [modal, setModal] = useState(false);
-
   return (
     <Context.Provider value={{ modal, setModal }}>{children}</Context.Provider>
   );

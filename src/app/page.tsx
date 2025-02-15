@@ -1,9 +1,7 @@
-import Input from "@/components/Input";
-import ListArtist from "@/components/listArtist";
+import ListArtist from "@/components/ListArtist";
 export default function Artists() {
   return (
     <main className="flex flex-col items-center mt-4">
-      <Input placeholder="search" />
       <ListArtist />
     </main>
   );
