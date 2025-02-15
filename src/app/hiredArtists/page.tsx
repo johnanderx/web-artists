@@ -16,7 +16,7 @@ export default function HiredArtists() {
   return (
     <div className="p-4">
       <h1 className="text-xl font-bold text-white text-center mt-4 mb-4">
-        Artistas Contratados
+        Contracted Artists
       </h1>
       <ul className="space-y-2 w-full flex flex-col items-center">
         {hiredArtists.map((artist, index: number) => (
@@ -30,12 +30,12 @@ export default function HiredArtists() {
             </div>
 
             <div className="flex gap-2">
-              <span className="text-sm text-white">Artista:</span>
+              <span className="text-sm text-white">Artist:</span>
               <p className="text-gray01">{artist.artist}</p>
             </div>
             <div className="flex gap-2">
               <span className="text-sm text-white">Money:</span>
-              <span className="text-gray01">{artist.money}</span>
+              <span className="text-gray01">R$ {artist.money}</span>
             </div>
 
             <div className="flex gap-2">

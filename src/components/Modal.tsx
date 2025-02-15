@@ -44,9 +44,7 @@ export default function Modal() {
     const formData = { name, artist, money, eventData, address };
     const updatedHiredArtists = [...hiredArtists, formData];
     setHiredArtists(updatedHiredArtists);
-
     localStorage.setItem("hiredArtists", JSON.stringify(updatedHiredArtists));
-
     setModal(!modal);
     route.push("/hiredArtists");
   };
@@ -64,27 +62,37 @@ export default function Modal() {
             onClick={() => setModal(!modal)}
             className="text-white text-4xl cursor-pointer"
           />
-          <Input
-            placeholder="name"
-            event={(e: any) => setName(e.target.value)}
-          />
-          <Input
-            placeholder="Artista"
-            event={(e: any) => setArtist(e.target.value)}
-          />
-          <Input
-            placeholder="money"
-            event={(e: any) => setMoney(e.target.value)}
-          />
-          <Input
-            placeholder="Event date"
-            event={(e: any) => setEventData(e.target.value)}
-          />
-          <Input
-            placeholder="address"
-            event={(e: any) => setAddress(e.target.value)}
-          />
-          <Button title="Enviar" event={hireArtist} />
+          <form className="flex flex-col gap-4" action="#">
+            <Input
+              type="text"
+              placeholder="name"
+              event={(e: any) => setName(e.target.value)}
+            />
+            <Input
+              type="text"
+              placeholder="Artist"
+              event={(e: any) => setArtist(e.target.value)}
+            />
+            <Input
+              type="number"
+              placeholder="money"
+              event={(e: any) => setMoney(e.target.value)}
+            />
+            <Input
+              type="date"
+              placeholder="Event date"
+              event={(e: any) => setEventData(e.target.value)}
+            />
+            <Input
+              type="text"
+              placeholder="address"
+              event={(e: any) => setAddress(e.target.value)}
+            />
+            <div className="flex gap-2 justify-end">
+              <Button title="Cancel" event={() => setModal(!modal)} />
+              <Button title="Send" event={hireArtist} />
+            </div>
+          </form>
         </div>
       </div>
     </motion.div>

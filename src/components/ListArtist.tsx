@@ -54,6 +54,7 @@ export default function ListArtist() {
   return (
     <div className="p-4 space-y-4">
       <Input
+        type="text"
         placeholder="search"
         event={(e: any) => setQuery(e.target.value)}
       />
@@ -74,17 +75,17 @@ export default function ListArtist() {
                 {track.title}
               </h2>
               <p className="text-sm text-gray02  text-center truncate w-32">
-                Artista: {track.artist.name}
+                Artist: {track.artist.name}
               </p>
             </div>
-            <Button title="Selecionar" event={() => setModal(!modal)} />
+            <Button title="Select" event={() => setModal(!modal)} />
           </li>
         ))}
       </ul>
 
       <div className="flex justify-between mt-4">
-        <Button title="Anterior" event={prevPage} />
-        <Button title="Próximo" event={nextPage} />
+        <Button title="Prev" event={prevPage} />
+        <Button title="Next" event={nextPage} />
       </div>
 
       {modal && <Modal />}
