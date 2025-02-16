@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Input from "./Input";
 import { IoCloseSharp } from "react-icons/io5";
 import Button from "./Button";
@@ -7,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { useArtist } from "@/hooks/useArtist";
 import { modalVariants } from "@/anim/modal";
 import { storage } from "@/storage/localStorage";
+import { toast } from "react-toastify";
+
 export default function Modal() {
   const route = useRouter();
   const { modal, setModal } = useModal();
@@ -26,14 +29,51 @@ export default function Modal() {
     selectedArtist,
   } = useArtist();
 
-  const hireArtist = () => {
+  const hireArtist = (e: any) => {
+    e.preventDefault();
     const formData = { name, artist, money, eventData, address };
+    const isArtistAlreadyHired = hiredArtists.some(
+      (hiredArtist) => hiredArtist.artist === selectedArtist
+    );
+
+    if (isArtistAlreadyHired) {
+      toast.error("This artist is already hired!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      return;
+    }
     const updatedHiredArtists = [...hiredArtists, formData];
     setHiredArtists(updatedHiredArtists);
     storage.save("hiredArtists", updatedHiredArtists);
     setModal(!modal);
-    route.push("/hiredArtists");
+
+    toast.success("Success", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+    setTimeout(() => {
+      route.push("/hiredArtists");
+    }, 2000);
   };
+
+  useEffect(() => {
+    if (selectedArtist) {
+      setArtist(selectedArtist);
+    }
+  }, [selectedArtist, setArtist]);
 
   return (
     <motion.div
@@ -54,12 +94,7 @@ export default function Modal() {
               placeholder="name"
               event={(e: any) => setName(e.target.value)}
             />
-            <Input
-              type="text"
-              placeholder="Artist"
-              event={(e: any) => setArtist(e.target.value)}
-              value={selectedArtist}
-            />
+            <Input type="text" placeholder="Artist" value={selectedArtist} />
             <Input
               type="number"
               placeholder="money"

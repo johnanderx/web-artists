@@ -4,7 +4,7 @@ export const storage = {
   },
 
   get: (key: string) => {
-    const storedHiredArtists = localStorage.getItem("hiredArtists");
+    const storedHiredArtists = localStorage.getItem(key);
     return storedHiredArtists;
   },
 };

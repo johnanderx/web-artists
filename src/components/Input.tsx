@@ -14,7 +14,7 @@ export default function Input({ placeholder, event, value, type }: InputProps) {
       type={type}
       placeholder={placeholder}
       onChange={event}
-      value={value}
+      defaultValue={value}
     />
   );
 }
