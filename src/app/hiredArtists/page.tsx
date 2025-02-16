@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useContexts } from "@/hooks/useContext";
-
+import { useArtist } from "@/hooks/useArtist";
+import { storage } from "@/storage/localStorage";
 export default function HiredArtists() {
-  const { hiredArtists, setHiredArtists } = useContexts();
+  const { hiredArtists, setHiredArtists } = useArtist();
 
   useEffect(() => {
-    const storedHiredArtists = localStorage.getItem("hiredArtists");
+    const storedHiredArtists = storage.get("hiredArtists");
     if (storedHiredArtists) {
       setHiredArtists(JSON.parse(storedHiredArtists));
     }

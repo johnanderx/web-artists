@@ -1,15 +1,16 @@
-import React, { useCallback, useEffect } from "react";
 import Input from "./Input";
 import { IoCloseSharp } from "react-icons/io5";
 import Button from "./Button";
-import { useContexts } from "@/hooks/useContext";
+import { useModal } from "@/hooks/useContext";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-
+import { useArtist } from "@/hooks/useArtist";
+import { modalVariants } from "@/anim/modal";
+import { storage } from "@/storage/localStorage";
 export default function Modal() {
+  const route = useRouter();
+  const { modal, setModal } = useModal();
   const {
-    modal,
-    setModal,
     setHiredArtists,
     hiredArtists,
     name,
@@ -22,29 +23,13 @@ export default function Modal() {
     setAddress,
     setEventData,
     setMoney,
-  } = useContexts();
-
-  const route = useRouter();
-
-  const modalVariants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.8,
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
+  } = useArtist();
 
   const hireArtist = () => {
     const formData = { name, artist, money, eventData, address };
     const updatedHiredArtists = [...hiredArtists, formData];
     setHiredArtists(updatedHiredArtists);
-    localStorage.setItem("hiredArtists", JSON.stringify(updatedHiredArtists));
+    storage.save("hiredArtists", updatedHiredArtists);
     setModal(!modal);
     route.push("/hiredArtists");
   };

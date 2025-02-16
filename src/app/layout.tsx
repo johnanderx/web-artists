@@ -2,7 +2,9 @@ import React from "react";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import ContextProvider from "@/context/Context";
+import ModalContextProvider from "@/context/ModalContext";
+import PaginationContextProvider from "@/context/PaginationContext";
+import ArtistContextProvider from "@/context/ArtistContext";
 const poppins = Poppins({
   weight: ["400", "600", "800"],
   subsets: ["latin"],
@@ -21,7 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true} className={`${poppins} bg-dark01 `}>
-        <ContextProvider>{children}</ContextProvider>
+        <PaginationContextProvider>
+          <ArtistContextProvider>
+            <ModalContextProvider>{children}</ModalContextProvider>
+          </ArtistContextProvider>
+        </PaginationContextProvider>
       </body>
     </html>
   );

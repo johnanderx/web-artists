@@ -1,15 +1,16 @@
 "use client";
+import { useEffect } from "react";
+import { useModal } from "@/hooks/useContext";
+import { usePagination } from "@/hooks/usePagination";
 import Modal from "./Modal";
 import Button from "./Button";
-import { useContexts } from "@/hooks/useContext";
-import { useEffect } from "react";
 import Input from "./Input";
-import { Track } from "@/@types/types";
+import { Track } from "@/@types/artist";
 
 export default function ListArtist() {
+  const { modal, setModal } = useModal();
+
   const {
-    modal,
-    setModal,
     tracks,
     setTracks,
     query,
@@ -19,7 +20,7 @@ export default function ListArtist() {
     setOffset,
     total,
     setTotal,
-  } = useContexts();
+  } = usePagination();
 
   useEffect(() => {
     const fetchTracks = async () => {
