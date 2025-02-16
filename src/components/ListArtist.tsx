@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useModal } from "@/hooks/useContext";
 import { usePagination } from "@/hooks/usePagination";
 import { useArtist } from "@/hooks/useArtist";
@@ -8,9 +8,11 @@ import Button from "./Button";
 import Input from "./Input";
 import api from "@/services/api";
 import { Track } from "@/@types/artist";
+import Skeleton from "./Skeleton";
 
 export default function ListArtist() {
   const { modal, setModal } = useModal();
+  const [loading, setLoading] = useState(true);
 
   const {
     tracks,
@@ -25,6 +27,7 @@ export default function ListArtist() {
   } = usePagination();
 
   const { setSelectedArtist } = useArtist();
+
   const openModal = (artistName: string) => {
     setModal(!modal);
     setSelectedArtist(artistName);
@@ -33,6 +36,7 @@ export default function ListArtist() {
   useEffect(() => {
     const fetchTracks = async () => {
       try {
+        setLoading(true);
         const response = await api.get("search", {
           params: {
             q: query,
@@ -51,6 +55,8 @@ export default function ListArtist() {
         }
       } catch (error) {
         console.error("Erro ao buscar músicas:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -74,27 +80,35 @@ export default function ListArtist() {
       />
       <h1 className="text-xl text-white font-bold">List of Tracks</h1>
       <ul className="space-y-2 w-full flex flex-col items-center">
-        {tracks.map((track: Track) => (
-          <li
-            key={track.id}
-            className="bg-black hover:bg-neutral-950 duration-500 p-4 w-[98%] lg:w-96 rounded-lg shadow-md flex justify-between items-center"
-          >
-            <img
-              className="h-20 w-20"
-              src={track.artist.picture_medium}
-              alt={track.artist.name}
-            />
-            <div>
-              <h2 className="text-lg text-center font-semibold text-gray01 truncate w-32 ">
-                {track.title}
-              </h2>
-              <p className="text-sm text-gray02  text-center truncate w-32">
-                Artist: {track.artist.name}
-              </p>
-            </div>
-            <Button title="Select" event={() => openModal(track.artist.name)} />
-          </li>
-        ))}
+        {loading
+          ? // Creating an array with x (limit) empty elements or rendering the loaded items.
+            Array.from({ length: limit }).map((_, index) => (
+              <Skeleton key={index} />
+            ))
+          : tracks.map((track: Track) => (
+              <li
+                key={track.id}
+                className="bg-black hover:bg-neutral-950 duration-500 p-4 w-[98%] lg:w-96 rounded-lg shadow-md flex justify-between items-center"
+              >
+                <img
+                  className="h-20 w-20"
+                  src={track.artist.picture_medium}
+                  alt={track.artist.name}
+                />
+                <div>
+                  <h2 className="text-lg text-center font-semibold text-gray01 truncate w-32 ">
+                    {track.title}
+                  </h2>
+                  <p className="text-sm text-gray02  text-center truncate w-32">
+                    Artist: {track.artist.name}
+                  </p>
+                </div>
+                <Button
+                  title="Select"
+                  event={() => openModal(track.artist.name)}
+                />
+              </li>
+            ))}
       </ul>
 
       <div className="flex justify-between mt-4">
