@@ -1,7 +1,7 @@
 import React from "react";
 interface ButtonProps {
   title: string;
-  event?: () => void;
+  event?: (e: any) => void;
 }
 export default function Button({ title, event }: ButtonProps) {
   return (

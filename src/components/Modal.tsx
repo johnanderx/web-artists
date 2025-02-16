@@ -23,6 +23,7 @@ export default function Modal() {
     setAddress,
     setEventData,
     setMoney,
+    selectedArtist,
   } = useArtist();
 
   const hireArtist = () => {
@@ -57,6 +58,7 @@ export default function Modal() {
               type="text"
               placeholder="Artist"
               event={(e: any) => setArtist(e.target.value)}
+              value={selectedArtist}
             />
             <Input
               type="number"

@@ -1,7 +1,6 @@
 "use client";
 import { createContext, useState } from "react";
 import { ArtistContextType, HiredArtistType } from "@/@types/artist";
-import { useRouter } from "next/navigation";
 
 interface ArtistContextProps {
   children: React.ReactNode;
@@ -18,9 +17,7 @@ export default function ArtistContextProvider({
   const [money, setMoney] = useState(0);
   const [eventData, setEventData] = useState("");
   const [address, setAddress] = useState("");
-
-  const route = useRouter();
-
+  const [selectedArtist, setSelectedArtist] = useState("");
   return (
     <ArtistContext.Provider
       value={{
@@ -36,6 +33,8 @@ export default function ArtistContextProvider({
         setArtist,
         eventData,
         setEventData,
+        selectedArtist,
+        setSelectedArtist,
       }}
     >
       {children}

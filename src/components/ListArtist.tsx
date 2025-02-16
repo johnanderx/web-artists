@@ -2,11 +2,12 @@
 import { useEffect } from "react";
 import { useModal } from "@/hooks/useContext";
 import { usePagination } from "@/hooks/usePagination";
+import { useArtist } from "@/hooks/useArtist";
 import Modal from "./Modal";
 import Button from "./Button";
 import Input from "./Input";
-import { Track } from "@/@types/artist";
 import api from "@/services/api";
+import { Track } from "@/@types/artist";
 
 export default function ListArtist() {
   const { modal, setModal } = useModal();
@@ -22,6 +23,12 @@ export default function ListArtist() {
     total,
     setTotal,
   } = usePagination();
+
+  const { setSelectedArtist } = useArtist();
+  const openModal = (artistName: string) => {
+    setModal(!modal);
+    setSelectedArtist(artistName);
+  };
 
   useEffect(() => {
     const fetchTracks = async () => {
@@ -85,7 +92,7 @@ export default function ListArtist() {
                 Artist: {track.artist.name}
               </p>
             </div>
-            <Button title="Select" event={() => setModal(!modal)} />
+            <Button title="Select" event={() => openModal(track.artist.name)} />
           </li>
         ))}
       </ul>

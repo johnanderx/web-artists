@@ -42,4 +42,6 @@ export type ArtistContextType = {
   setEventData: React.Dispatch<React.SetStateAction<string>>;
   address: string;
   setAddress: React.Dispatch<React.SetStateAction<string>>;
+  selectedArtist: string;
+  setSelectedArtist: React.Dispatch<React.SetStateAction<string>>;
 };
