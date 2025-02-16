@@ -1,59 +1,25 @@
 # Aplicação Web para Contratação de Artistas
 
-## Visão Geral do Projeto
+## Observações:
 
-Este projeto é uma aplicação web projetada para facilitar a contratação de artistas (bandas e cantores) para eventos particulares. O usuário pode pesquisar artistas, visualizar uma lista de resultados, selecionar um artista e enviar uma solicitação de contratação através de um formulário. As solicitações enviadas podem ser revisadas posteriormente.
+Para consultar os artistas, utilize alguma API como Spotify, Deezer ou YouTube, ou a que achar melhor. O importante é buscar informações de alguma fonte. Caso isso não seja possível, não tem problema: crie sua própria listagem de artistas, que será avaliada mesmo assim. Os campos marcados com \* são obrigatórios.
 
----
+Não é necessário salvar os dados em um banco de dados; você pode usar o localStorage. Contudo, caso opte por salvar os dados em um banco ou usar algum serviço de armazenamento, isso lhe renderá pontos adicionais no teste.
+
+Você é livre para escolher entre Next.js ou React (Vite) como framework JS, além de bibliotecas de sua preferência (Laravel no backend).
+Tornar o projeto responsivo é um diferencial interessante.
+Quanto ao layout, ele é livre, mas precisa ser intuitivo.
+
+## Enredo
+
+Enredo: O cliente ES solicita que você crie uma aplicação web para a contratação de artistas para shows particulares. Crie uma página, onde há um campo de pesquisa, este campo de pesquisa deve buscar por artistas (bandas e cantores), o resultado deve exibir uma grade ou listagem para que o usuário possa escolher um dos resultados.
+
+Ao escolher um dos resultados, o usuário deve ser levado a um formulário, que colete informações sobre a contratação do artista selecionado, contendo os campos: Nome*, Artista Selecionado*, Cachê, Data do evento\* e Endereço. A submissão do formulário deve ser registrada e uma tela de sucesso exibida. Caso queira, o usuário poderá repetir o processo e consultar as contratações submetidas anteriormente.
 
 ## Funcionalidades
 
-1. **Pesquisa de Artistas**:
-   - Campo de busca para consultar artistas usando uma API externa (Spotify, Deezer, etc.).
-   - Caso não seja possível integrar com API, será utilizada uma lista personalizada de artistas.
-2. **Listagem de Artistas**: Exibição dos resultados de busca em formato de lista ou grade, permitindo fácil seleção.
-
-3. **Formulário de Contratação**: Formulário para coletar os detalhes da contratação:
-
-   - **Campos Obrigatórios**:
-     - Nome do Contratante
-     - Artista Selecionado
-     - Data do Evento
-     - Endereço do Evento
-   - **Campo Opcional**:
-     - Cachê do Artista
-
+1. **Pesquisa de Artistas**
+2. **Listagem de Artistas**
+3. **Formulário de Contratação**
 4. **Processamento de Submissão**:
-
-   - As solicitações são armazenadas no `localStorage` ou em um banco de dados (opcional).
-   - Após a submissão, uma tela de sucesso é exibida, permitindo que o usuário realize uma nova contratação ou visualize as solicitações enviadas.
-
-5. **Responsividade**: Layout completamente responsivo para dispositivos móveis, tablets e desktops.
-
-6. **Melhoria da Experiência do Usuário**:
-
-   - Exibição de artistas em alta ou relevantes na página inicial, caso nenhuma busca seja realizada.
-   - Feedbacks visuais nas interações (validação de inputs, estados de carregamento, etc.).
-   - Animações e transições suaves em CSS.
-
-7. **Qualidade do Código**:
-   - Componentes reutilizáveis e bem organizados.
-   - Código semântico e comentado em inglês.
-
----
-
-## Stack Tecnológico
-
-### Frontend:
-
-- **Framework**: React com Vite ou Next.js
-- **Bibliotecas**:
-  - Axios (para requisições API)
-  - React Router (para navegação)
-  - Styled-Components / TailwindCSS (para estilização)
-
-### Backend:
-
-- **Framework**: Laravel
-- **Banco de Dados** (opcional): MySQL/PostgreSQL (ou outro de preferência)
-- **API**: Integração com Spotify, Deezer, ou uma lista personalizada de artistas.
+5. **Responsividade**.
