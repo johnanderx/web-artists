@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useModal } from "@/hooks/useContext";
+import { useModal } from "@/hooks/useModal";
 import { usePagination } from "@/hooks/usePagination";
 import { useArtist } from "@/hooks/useArtist";
 import Modal from "./Modal";

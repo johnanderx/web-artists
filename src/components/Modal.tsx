@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Input from "./Input";
 import { IoCloseSharp } from "react-icons/io5";
 import Button from "./Button";
-import { useModal } from "@/hooks/useContext";
+import { useModal } from "@/hooks/useModal";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useArtist } from "@/hooks/useArtist";
