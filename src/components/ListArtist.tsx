@@ -6,6 +6,7 @@ import Modal from "./Modal";
 import Button from "./Button";
 import Input from "./Input";
 import { Track } from "@/@types/artist";
+import api from "@/services/api";
 
 export default function ListArtist() {
   const { modal, setModal } = useModal();
@@ -25,11 +26,16 @@ export default function ListArtist() {
   useEffect(() => {
     const fetchTracks = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:8080/https://api.deezer.com/search?q=${query}&limit=${limit}&index=${offset}`
-        );
+        const response = await api.get("search", {
+          params: {
+            q: query,
+            limit: limit,
+            index: offset,
+          },
+        });
 
-        const data = await response.json();
+        const data = response.data;
+
         if (data.data) {
           setTracks(data.data);
           setTotal(data.total);
