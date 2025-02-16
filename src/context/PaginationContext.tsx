@@ -13,7 +13,7 @@ export default function PaginationContextProvider({
   children,
 }: PaginationContextProps) {
   const [tracks, setTracks] = useState<Track[]>([]);
-  const [query, setQuery] = useState("Rock");
+  const [query, setQuery] = useState("");
   const [limit] = useState(10);
   const [offset, setOffset] = useState(0);
   const [total, setTotal] = useState(0);

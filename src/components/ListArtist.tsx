@@ -13,7 +13,7 @@ import Skeleton from "./Skeleton";
 export default function ListArtist() {
   const { modal, setModal } = useModal();
   const [loading, setLoading] = useState(true);
-
+  const [trendingTracks, setTrendingTracks] = useState<Track[]>([]);
   const {
     tracks,
     setTracks,
@@ -32,7 +32,28 @@ export default function ListArtist() {
     setModal(!modal);
     setSelectedArtist(artistName);
   };
+  const fetchTrendingTracks = async () => {
+    try {
+      setLoading(true);
+      const response = await api.get("chart/0/tracks", {
+        params: {
+          limit: limit,
+        },
+      });
 
+      const data = response.data;
+
+      if (data.data) {
+        setTrendingTracks(data.data);
+      } else {
+        console.log("Dados não encontrados na resposta da API");
+      }
+    } catch (error) {
+      console.error("Erro ao buscar músicas em tendência:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     const fetchTracks = async () => {
       try {
@@ -60,7 +81,11 @@ export default function ListArtist() {
       }
     };
 
-    fetchTracks();
+    if (query) {
+      fetchTracks();
+    } else {
+      fetchTrendingTracks();
+    }
   }, [query, limit, offset]);
 
   const nextPage = () => {
@@ -70,7 +95,7 @@ export default function ListArtist() {
   const prevPage = () => {
     if (offset > 0) setOffset(offset - limit);
   };
-
+  const renderTracks = query ? tracks : trendingTracks;
   return (
     <div className="p-4 space-y-4">
       <Input
@@ -85,7 +110,7 @@ export default function ListArtist() {
             Array.from({ length: limit }).map((_, index) => (
               <Skeleton key={index} />
             ))
-          : tracks.map((track: Track) => (
+          : renderTracks.map((track: Track) => (
               <li
                 key={track.id}
                 className="bg-black hover:bg-neutral-950 duration-500 p-4 w-[98%] lg:w-96 rounded-lg shadow-md flex justify-between items-center"
