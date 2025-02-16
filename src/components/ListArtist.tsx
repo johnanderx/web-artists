@@ -38,6 +38,7 @@ export default function ListArtist() {
       const response = await api.get("chart/0/tracks", {
         params: {
           limit: limit,
+          index: offset,
         },
       });
 
@@ -113,7 +114,7 @@ export default function ListArtist() {
           : renderTracks.map((track: Track) => (
               <li
                 key={track.id}
-                className="bg-black hover:bg-neutral-950 duration-500 p-4 w-[98%] lg:w-96 rounded-lg shadow-md flex justify-between items-center"
+                className="bg-black hover:bg-neutral-950 duration-500 p-4 w-[370px] :w-96 rounded-lg shadow-md flex justify-between items-center"
               >
                 <img
                   className="h-20 w-20"

@@ -36,6 +36,20 @@ export default function Modal() {
       (hiredArtist) => hiredArtist.artist === selectedArtist
     );
 
+    if (!name || !artist || !money || !eventData || !address) {
+      toast.error("Fields cannot be empty!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      return;
+    }
+
     if (isArtistAlreadyHired) {
       toast.error("This artist is already hired!", {
         position: "top-right",
