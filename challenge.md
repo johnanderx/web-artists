@@ -16,6 +16,10 @@ Enredo: O cliente ES solicita que você crie uma aplicação web para a contrata
 
 Ao escolher um dos resultados, o usuário deve ser levado a um formulário, que colete informações sobre a contratação do artista selecionado, contendo os campos: Nome*, Artista Selecionado*, Cachê, Data do evento\* e Endereço. A submissão do formulário deve ser registrada e uma tela de sucesso exibida. Caso queira, o usuário poderá repetir o processo e consultar as contratações submetidas anteriormente.
 
+## Pontos extra
+
+A tela inicial, quando não houver nenhuma pesquisa, mostrará resultados baseados em tendências, relevância, em alta; Animações e transições no CSS são bem vindas; Caso use a consulta de API, usar lazy loading ou paginação é interessante; Feedbacks visuais para o usuário (alertas, inputs...).
+
 ## Funcionalidades
 
 1. **Pesquisa de Artistas**
